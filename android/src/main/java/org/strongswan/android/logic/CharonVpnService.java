@@ -912,7 +912,6 @@ public class CharonVpnService extends VpnService implements Runnable, VpnStateSe
         private boolean mIPv4Seen, mIPv6Seen, mDnsServersConfigured;
 
         public BuilderCache(VpnProfile profile) {
-            print("AAAXXXXXXXXX");
             IPRangeSet included = IPRangeSet.fromString(profile.getIncludedSubnets());
             for (IPRange range : included) {
                 if (range.getFrom() instanceof Inet4Address) {
@@ -927,18 +926,19 @@ public class CharonVpnService extends VpnService implements Runnable, VpnStateSe
             SelectedAppsHandling appHandling = profile.getSelectedAppsHandling();
             mSelectedApps = profile.getSelectedAppsSet();
             /* exclude our own app, otherwise the fetcher is blocked */
-            switch (appHandling) {
-                case SELECTED_APPS_DISABLE:
-                    appHandling = SelectedAppsHandling.SELECTED_APPS_EXCLUDE;
-                    mSelectedApps.clear();
-                    /* fall-through */
-                case SELECTED_APPS_EXCLUDE:
-                    mSelectedApps.add(getPackageName());
-                    break;
-                case SELECTED_APPS_ONLY:
-                    mSelectedApps.remove(getPackageName());
-                    break;
-            }
+//             switch (appHandling) {
+//                 case SELECTED_APPS_DISABLE:
+//                     appHandling = SelectedAppsHandling.SELECTED_APPS_EXCLUDE;
+//                     mSelectedApps.clear();
+//                     /* fall-through */
+//                 case SELECTED_APPS_EXCLUDE:
+//                     mSelectedApps.add(getPackageName());
+//                     break;
+//                 case SELECTED_APPS_ONLY:
+//                     mSelectedApps.remove(getPackageName());
+//                     break;
+//             }
+            mSelectedApps.add(getPackageName());
             mAppHandling = appHandling;
 
             if (profile.getDnsServers() != null) {
