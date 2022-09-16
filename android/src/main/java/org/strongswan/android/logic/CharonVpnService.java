@@ -912,6 +912,7 @@ public class CharonVpnService extends VpnService implements Runnable, VpnStateSe
         private boolean mIPv4Seen, mIPv6Seen, mDnsServersConfigured;
 
         public BuilderCache(VpnProfile profile) {
+            print('AAAXXXXXXXXX');
             IPRangeSet included = IPRangeSet.fromString(profile.getIncludedSubnets());
             for (IPRange range : included) {
                 if (range.getFrom() instanceof Inet4Address) {
