@@ -48,6 +48,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace = 'io.xdea.flutter_vpn'
     compileSdkVersion 31
 
     compileOptions {
